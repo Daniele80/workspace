@@ -5,6 +5,7 @@ import it.rock.rock_app.model.UserDTO;
 import it.rock.rock_app.repos.RoleRepository;
 import it.rock.rock_app.service.UserService;
 import it.rock.rock_app.util.CustomCollectors;
+import it.rock.rock_app.util.UserAlreadyExistException;
 import it.rock.rock_app.util.WebUtils;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+    public static final String REDIRECT="redirect:";
 
     private final UserService userService;
     private final RoleRepository roleRepository;
@@ -83,6 +85,28 @@ public class UserController {
         userService.delete(id);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("user.delete.success"));
         return "redirect:/users";
+    }
+
+    @GetMapping("/register")
+    public String register(final Model model){
+        model.addAttribute("user", new UserDTO());
+        return "user/register";
+    }
+
+    @PostMapping("/register")
+    public String userRegistration(final @Valid  UserDTO userData, final BindingResult bindingResult, final Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("registrationForm", userData);
+            return "user/register";
+        }
+        try {
+            userService.register(userData);
+        }catch (UserAlreadyExistException e){
+            bindingResult.rejectValue("email", "userData.email","An account already exists for this email.");
+            model.addAttribute("registrationForm", userData);
+            return "home/index";
+        }
+        return "home/index";
     }
 
 }

@@ -1,14 +1,14 @@
 package it.rock.rock_app.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UserDTO {
 
     private Long id;
@@ -18,8 +18,17 @@ public class UserDTO {
     private String username;
 
     @Size(max = 255)
+    @NotEmpty(message = "Password can not be empty")
     private String password;
 
-    private List<Long> roles;
+    @Size(max = 255)
+    private String matchingPassword;
 
+    private String firstName;
+    
+    private String lastName;
+       
+    private String email;
+   
+    private List<Long> roles;
 }

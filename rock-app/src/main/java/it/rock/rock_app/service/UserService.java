@@ -6,17 +6,26 @@ import it.rock.rock_app.model.UserDTO;
 import it.rock.rock_app.repos.RoleRepository;
 import it.rock.rock_app.repos.UserRepository;
 import it.rock.rock_app.util.NotFoundException;
+import it.rock.rock_app.util.UserAlreadyExistException;
 import jakarta.transaction.Transactional;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Transactional
 @Service
 public class UserService {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -76,6 +85,27 @@ public class UserService {
         }
         user.setRoles(roles.stream().collect(Collectors.toSet()));
         return user;
+    }
+
+    public void register(UserDTO user) throws UserAlreadyExistException {
+
+        //Let's check if user already registered with us
+        if(checkIfUserExist(user.getEmail())){
+            throw new UserAlreadyExistException("User already exists for this email");
+        }
+        User userEntity = new User();
+        BeanUtils.copyProperties(user, userEntity);
+        encodePassword(userEntity, user);
+        userRepository.save(userEntity);
+    }
+
+    
+    public boolean checkIfUserExist(String email) {
+        return userRepository.findByEmail(email) !=null ? true : false;
+    }
+
+    private void encodePassword( User user, UserDTO userDTO){
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
     }
 
 }
