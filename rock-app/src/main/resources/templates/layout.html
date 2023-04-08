@@ -39,7 +39,11 @@
                                 </ul>
                             </li>
                             <li class="navbar-item">
-                                <a th:href="@{/users/register}" th:text="#{navigation.register}" class="nav-link" />
+                                <a th:href="@{/auth/login}" th:text="#{navigation.login}" class="nav-link" />
+                            </li>
+                            
+                            <li class="navbar-item">
+                                <a th:href="@{/auth/register}" th:text="#{navigation.register}" class="nav-link" />
                             </li>
                         </ul>
                     </div>

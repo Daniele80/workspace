@@ -1,7 +1,8 @@
 package it.rock.rock_app.model;
 
-import jakarta.validation.constraints.Size;
 import java.util.List;
+
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 

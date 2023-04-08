@@ -1,5 +1,10 @@
 package it.rock.rock_app.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import it.rock.rock_app.domain.Project;
 import it.rock.rock_app.domain.Task;
 import it.rock.rock_app.model.TaskDTO;
@@ -7,9 +12,6 @@ import it.rock.rock_app.repos.ProjectRepository;
 import it.rock.rock_app.repos.TaskRepository;
 import it.rock.rock_app.util.NotFoundException;
 import it.rock.rock_app.util.WebUtils;
-import java.util.List;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 
 @Service

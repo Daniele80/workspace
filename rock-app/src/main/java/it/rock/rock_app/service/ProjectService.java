@@ -1,5 +1,12 @@
 package it.rock.rock_app.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import it.rock.rock_app.domain.App;
 import it.rock.rock_app.domain.Project;
 import it.rock.rock_app.domain.Task;
@@ -10,11 +17,6 @@ import it.rock.rock_app.repos.TaskRepository;
 import it.rock.rock_app.util.NotFoundException;
 import it.rock.rock_app.util.WebUtils;
 import jakarta.transaction.Transactional;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 
 @Transactional

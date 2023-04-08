@@ -14,8 +14,11 @@
             </div>
             <div th:replace="~{fragments/forms::globalErrors('user')}" />
             <form th:action="${T(it.rock.rock_app.util.WebUtils).getRequest().requestURI}" method="post">
-                <div th:replace="~{fragments/forms::inputRow(object='user', field='username')}" />
+           <div th:replace="~{fragments/forms::inputRow(object='user', field='username')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='user', field='password')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='user', field='firstName')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='user', field='lastName')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='user', field='email')}" />      
                 <div th:replace="~{fragments/forms::inputRow(object='user', field='roles', type='multiselect')}" />
                 <input type="submit" th:value="#{user.edit.headline}" class="btn btn-primary mt-4" />
             </form>

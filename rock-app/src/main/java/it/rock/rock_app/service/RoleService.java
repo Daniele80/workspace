@@ -1,5 +1,10 @@
 package it.rock.rock_app.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import it.rock.rock_app.domain.Role;
 import it.rock.rock_app.domain.User;
 import it.rock.rock_app.model.RoleDTO;
@@ -7,9 +12,6 @@ import it.rock.rock_app.repos.RoleRepository;
 import it.rock.rock_app.repos.UserRepository;
 import it.rock.rock_app.util.NotFoundException;
 import it.rock.rock_app.util.WebUtils;
-import java.util.List;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 
 @Service

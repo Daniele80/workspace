@@ -19,6 +19,7 @@
                         <tr>
                             <th th:text="#{user.id.label}" scope="col" />
                             <th th:text="#{user.username.label}" scope="col" />
+                            <th th:text="#{user.email.label}" scope="col" />
                             <th th:text="#{user.password.label}" scope="col" />
                             <th><!-- --></th>
                         </tr>
@@ -27,6 +28,7 @@
                         <tr th:each="user : ${users}">
                             <td th:text="${user.id}" />
                             <td th:text="${user.username}" />
+                             <td th:text="${user.email}" />
                             <td th:text="${user.password}" />
                             <td>
                                 <div class="float-end text-nowrap">

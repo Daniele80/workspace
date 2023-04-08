@@ -1,13 +1,5 @@
 package it.rock.rock_app.controller;
 
-import it.rock.rock_app.domain.Role;
-import it.rock.rock_app.model.UserDTO;
-import it.rock.rock_app.repos.RoleRepository;
-import it.rock.rock_app.service.UserService;
-import it.rock.rock_app.util.CustomCollectors;
-import it.rock.rock_app.util.UserAlreadyExistException;
-import it.rock.rock_app.util.WebUtils;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import it.rock.rock_app.domain.Role;
+import it.rock.rock_app.model.UserDTO;
+import it.rock.rock_app.repos.RoleRepository;
+import it.rock.rock_app.service.UserService;
+import it.rock.rock_app.util.CustomCollectors;
+import it.rock.rock_app.util.WebUtils;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -87,26 +87,6 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/register")
-    public String register(final Model model){
-        model.addAttribute("user", new UserDTO());
-        return "user/register";
-    }
 
-    @PostMapping("/register")
-    public String userRegistration(final @Valid  UserDTO userData, final BindingResult bindingResult, final Model model){
-        if(bindingResult.hasErrors()){
-            model.addAttribute("registrationForm", userData);
-            return "user/register";
-        }
-        try {
-            userService.register(userData);
-        }catch (UserAlreadyExistException e){
-            bindingResult.rejectValue("email", "userData.email","An account already exists for this email.");
-            model.addAttribute("registrationForm", userData);
-            return "home/index";
-        }
-        return "home/index";
-    }
 
 }

@@ -1,10 +1,7 @@
 package it.rock.rock_app.config;
 
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import it.rock.rock_app.model.ErrorResponse;
-import it.rock.rock_app.model.FieldError;
-import it.rock.rock_app.util.NotFoundException;
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,6 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import it.rock.rock_app.model.ErrorResponse;
+import it.rock.rock_app.model.FieldError;
+import it.rock.rock_app.util.NotFoundException;
 
 
 @RestControllerAdvice(annotations = RestController.class)
